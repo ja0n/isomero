@@ -6,25 +6,42 @@ class Isomero {
       [1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1],
     ];
+
+    this.map = [
+      [1, 1, 1],
+      [1, 1, 1],
+      [1, 1, 1],
+    ];
   }
 
   drawMap() {
+    const tileSize = 32;
     const { ctx } = this;
+
+    this.map.forEach((row, rowIndex) => {
+      row.forEach((item, colIndex) => {
+        this.drawTile(colIndex, rowIndex, tileSize);
+      });
+    });
+
+  }
+
+  drawTile(x, y, tileSize = 32) {
+    const { ctx } = this;
+    const halfTile = tileSize/2;
 
     ctx.save();
 
-    ctx.translate(32, 32);
-    ctx.setTransform (2, 0, 0, 1, 0, 0);
+    ctx.setTransform(2, 0, 0, 1, 0, 0);
+    ctx.translate(0, 0);
     ctx.rotate(Math.PI/4);
-    ctx.translate(-32, -32);
-    // ctx.translate(64, 64);
-    // ctx.translate(-200, -200);
 
-    ctx.strokeRect(64, 0, 64, 64);
+    ctx.strokeRect(0, 0, tileSize, tileSize);
 
     ctx.stroke();
 
     ctx.restore();
+
   }
 
 
